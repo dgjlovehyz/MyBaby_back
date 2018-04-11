@@ -36,10 +36,13 @@ class demoBiz {
         if (!params.nonce)
             return callback(new businessException("随机数错误"))
 
+        let dict = { token: sysconf.wxToken, timestamp: params.timestamp, nonce: params.nonce };
+        var sha1Str;
+        for (let key of Object.keys(dict).sort()) {
+            sha1Str = sha1 + dict[key]
+        }
         var sha1 = crypto.createHash("sha1");
-        sha1.update(sysconf.wxToken)
-        sha1.update(params.timestamp)
-        sha1.update(params.nonce)
+        sha1.update(sha1Str)
         console.log("timestamp:" + params.timestamp)
         console.log("nonce" + params.nonce)
         var _signature = sha1.digest('hex')
