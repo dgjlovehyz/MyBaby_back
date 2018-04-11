@@ -35,16 +35,18 @@ class demoBiz {
             return callback(new businessException("时间戳错误"))
         if (!params.nonce)
             return callback(new businessException("随机数错误"))
-        
+
         var sha1 = crypto.createHash("sha1");
         sha1.update(sysconf.wxToken)
         sha1.update(params.timestamp)
         sha1.update(params.nonce)
+        console.log("timestamp:" + params.timestamp)
+        console.log("nonce" + params.nonce)
         var _signature = sha1.digest('hex')
         console.log("signature:" + params.signature)
         console.log("_signature:" + _signature)
         if (_signature == params.signature)
-            return callback(null,params.echostr)
+            return callback(null, params.echostr)
         callback("签名验证失败")
     }
 }
