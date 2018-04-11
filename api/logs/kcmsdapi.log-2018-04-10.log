@@ -1,0 +1,243 @@
+[2018-04-10 11:34:27.805] [ERROR] Error - { Error: Handshake inactivity timeout
+    at Handshake.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:164:17)
+    at Handshake.emit (events.js:159:13)
+    at Handshake._onTimeout (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/sequences/Sequence.js:129:8)
+    at ontimeout (timers.js:478:11)
+    at tryOnTimeout (timers.js:302:5)
+    at Timer.listOnTimeout (timers.js:262:5)
+    --------------------
+    at Protocol._enqueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Protocol.handshake (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:52:23)
+    at PoolConnection.connect (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:130:18)
+    at Pool.getConnection (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:118:12)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:117:12)
+    at Function.manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:199:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/adverti-biz.js:23:17)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at Function.getAdvertisingList (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/adverti-biz.js:22:16)
+    at getAdvertisingList (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/adverti-ctrl.js:17:20)
+  code: 'PROTOCOL_SEQUENCE_TIMEOUT',
+  fatal: true,
+  timeout: 10000 }
+[2018-04-10 11:34:27.869] [ERROR] Error - { Error: Handshake inactivity timeout
+    at Handshake.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:164:17)
+    at Handshake.emit (events.js:159:13)
+    at Handshake._onTimeout (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/sequences/Sequence.js:129:8)
+    at ontimeout (timers.js:478:11)
+    at tryOnTimeout (timers.js:302:5)
+    at Timer.listOnTimeout (timers.js:262:5)
+    --------------------
+    at Protocol._enqueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Protocol.handshake (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:52:23)
+    at PoolConnection.connect (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:130:18)
+    at Pool.getConnection (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:118:12)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:117:12)
+    at Function.manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:199:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/adverti-biz.js:23:17)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at Function.getAdvertisingList (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/adverti-biz.js:22:16)
+    at getAdvertisingList (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/adverti-ctrl.js:17:20)
+  code: 'PROTOCOL_SEQUENCE_TIMEOUT',
+  fatal: true,
+  timeout: 10000 }
+[2018-04-10 11:34:27.879] [ERROR] Error - { Error: Handshake inactivity timeout
+    at Handshake.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:164:17)
+    at Handshake.emit (events.js:159:13)
+    at Handshake._onTimeout (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/sequences/Sequence.js:129:8)
+    at ontimeout (timers.js:478:11)
+    at tryOnTimeout (timers.js:302:5)
+    at Timer.listOnTimeout (timers.js:262:5)
+    --------------------
+    at Protocol._enqueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Protocol.handshake (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:52:23)
+    at PoolConnection.connect (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:130:18)
+    at Pool.getConnection (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:118:12)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:117:12)
+    at Function.manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:199:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/column-biz.js:25:17)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at Function.getColumnList (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/column-biz.js:24:16)
+    at getColumnList (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/column-ctrl.js:11:19)
+  code: 'PROTOCOL_SEQUENCE_TIMEOUT',
+  fatal: true,
+  timeout: 10000 }
+[2018-04-10 13:25:19.751] [ERROR] Error - { Error: 访问未授权.
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:35:25)
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-ctrl.js:42:27)
+    at funs (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:63:26)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at listener (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:151:9)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:176:3)
+    at router (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5) statusCode: 401 }
+[2018-04-10 13:25:29.625] [ERROR] Error - { Error: 访问未授权.
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:35:25)
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-ctrl.js:42:27)
+    at funs (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:63:26)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at listener (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:151:9)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:176:3)
+    at router (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5) statusCode: 401 }
+[2018-04-10 13:25:35.563] [ERROR] Error - { Error: 访问未授权.
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:35:25)
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-ctrl.js:42:27)
+    at funs (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:63:26)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at listener (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:151:9)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:176:3)
+    at router (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5) statusCode: 401 }
+[2018-04-10 13:26:29.682] [ERROR] Error - { Error: 访问未授权.
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:35:25)
+    at Function.auth (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-ctrl.js:42:27)
+    at funs (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:63:26)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at listener (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router.js:151:9)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:131:13)
+    at Route.dispatch (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:277:22
+    at Function.process_params (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:271:10)
+    at Function.handle (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:176:3)
+    at router (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5) statusCode: 401 }
+[2018-04-10 14:04:42.560] [ERROR] Error - { Error: 您已经加入了此拼团
+    at b2tGoodsDao.getB2tGroupById.then.then._isMemberJoined (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/b2t/b2t-goods-biz.js:925:47)
+    at tryCatcher (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:512:31)
+    at Promise._settlePromise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:569:18)
+    at Promise._settlePromise0 (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:614:10)
+    at Promise._settlePromises (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:693:18)
+    at Async._drainQueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:133:16)
+    at Async._drainQueues (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:143:10)
+    at Immediate.Async.drainQueues [as _onImmediate] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:800:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5) statusCode: 400, code: 30011 }
+[2018-04-10 14:11:04.096] [ERROR] Error - { Error: 您已经加入了此拼团
+    at b2tGoodsDao.getB2tGroupById.then.then._isMemberJoined (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/b2t/b2t-goods-biz.js:925:47)
+    at tryCatcher (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:512:31)
+    at Promise._settlePromise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:569:18)
+    at Promise._settlePromise0 (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:614:10)
+    at Promise._settlePromises (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:693:18)
+    at Async._drainQueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:133:16)
+    at Async._drainQueues (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:143:10)
+    at Immediate.Async.drainQueues [as _onImmediate] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:800:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5) statusCode: 400, code: 30011 }
+[2018-04-10 15:13:48.400] [ERROR] Error - { Error: 权限验证失败:用户未登录，请登录！
+    at AuthFrontCtrl.getSessionSidObj (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:39:29)
+    at async.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:87:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:473:16
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5315:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:958:16
+    at Request.request [as _callback] (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:75:36)
+    at Request.self.callback (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:186:22)
+    at Request.emit (events.js:159:13)
+    at Request.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1163:10)
+    at Request.emit (events.js:159:13)
+    at IncomingMessage.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:254:19)
+    at IncomingMessage.emit (events.js:164:20)
+    at endReadableNT (_stream_readable.js:1054:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9) statusCode: 401 }
+[2018-04-10 15:13:48.419] [ERROR] Error - { Error: 权限验证失败:用户未登录，请登录！
+    at AuthFrontCtrl.getSessionSidObj (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:39:29)
+    at async.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:87:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:473:16
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5315:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:958:16
+    at Request.request [as _callback] (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:75:36)
+    at Request.self.callback (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:186:22)
+    at Request.emit (events.js:159:13)
+    at Request.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1163:10)
+    at Request.emit (events.js:159:13)
+    at IncomingMessage.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:254:19)
+    at IncomingMessage.emit (events.js:164:20)
+    at endReadableNT (_stream_readable.js:1054:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9) statusCode: 401 }
+[2018-04-10 15:14:17.974] [ERROR] Error - { Error: 权限验证失败:用户未登录，请登录！
+    at AuthFrontCtrl.getSessionSidObj (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:39:29)
+    at async.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:87:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:473:16
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5315:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:958:16
+    at Request.request [as _callback] (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:75:36)
+    at Request.self.callback (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:186:22)
+    at Request.emit (events.js:159:13)
+    at Request.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1163:10)
+    at Request.emit (events.js:159:13)
+    at IncomingMessage.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:254:19)
+    at IncomingMessage.emit (events.js:164:20)
+    at endReadableNT (_stream_readable.js:1054:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9) statusCode: 401 }
+[2018-04-10 15:14:17.980] [ERROR] Error - { Error: 权限验证失败:用户未登录，请登录！
+    at AuthFrontCtrl.getSessionSidObj (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:39:29)
+    at async.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:87:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:473:16
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5315:29)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:958:16
+    at Request.request [as _callback] (/Users/zgl/Documents/kmsp/Branch/Code/api/controllers/auth-front-ctrl.js:75:36)
+    at Request.self.callback (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:186:22)
+    at Request.emit (events.js:159:13)
+    at Request.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1163:10)
+    at Request.emit (events.js:159:13)
+    at IncomingMessage.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:254:19)
+    at IncomingMessage.emit (events.js:164:20)
+    at endReadableNT (_stream_readable.js:1054:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9) statusCode: 401 }

@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动API",
+            "program": "${workspaceRoot}/api/app.js",
+            "cwd": "${workspaceRoot}/api"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "调启DOC",
+            "program": "${workspaceRoot}/doc/app.js",
+            "cwd": "${workspaceRoot}/doc"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "示例任务JOB",
+            "program": "${workspaceRoot}/job_scheduler/demo/demo-job.js",
+            "cwd": "${workspaceRoot}/job_scheduler/demo"
+        },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "api测试",
+        //     "program": "${workspaceRoot}/services/biz/b2t/b2t-group-biz.js",
+        //     "cwd": "${workspaceRoot}/services/biz"
+        // },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动mq-client",
+            "program": "${workspaceRoot}/mq/app.js",
+            "cwd": "${workspaceRoot}/mq"
+        }
+    ]
+}

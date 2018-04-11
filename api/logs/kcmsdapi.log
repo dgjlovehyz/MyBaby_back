@@ -1,0 +1,66 @@
+[2018-04-11 16:43:13.623] [ERROR] Error - { Error: Not Found
+    at module.exports (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router-not-found.js:12:10)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:312:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:618:15
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:256:14)
+    at Function.handle (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:176:3)
+    at router (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:46:12)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:312:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:618:15 statusCode: 404, code: 404 }
+[2018-04-11 16:46:18.221] [ERROR] Error - { Error: 签名错误
+    at Function.wxAuth (/Users/zgl/Documents/nodejsWork/Code/services/biz/wx-public-biz.js:32:29)
+    at wxAuth (/Users/zgl/Documents/nodejsWork/Code/api/controllers/wx-public-ctrl.js:20:21)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/route.js:131:13)
+    at funs (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router.js:133:24)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/route.js:131:13)
+    at funs (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router.js:71:21)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/route.js:131:13)
+    at Function.auth (/Users/zgl/Documents/nodejsWork/Code/api/controllers/auth-ctrl.js:34:20)
+    at funs (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router.js:63:26)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/route.js:131:13)
+    at listener (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router.js:155:9)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:95:5) statusCode: 400 }
+[2018-04-11 16:52:53.483] [ERROR] Error - Error: 签名验证失败
+    at module.exports (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router-error.js:17:15)
+    at Layer.handle_error (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:310:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at Layer.handle_error (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:67:12)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:310:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at Immediate.next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at Immediate._onImmediate (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:618:15)
+    at runCallback (timers.js:802:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5)
+[2018-04-11 16:53:35.972] [ERROR] Error - Error: 签名验证失败
+    at module.exports (/Users/zgl/Documents/nodejsWork/Code/framework/httpServer/routes/router-error.js:17:15)
+    at Layer.handle_error (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:71:5)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:310:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at Layer.handle_error (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/layer.js:67:12)
+    at trim_prefix (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:310:13)
+    at /Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:330:12)
+    at Immediate.next (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:271:10)
+    at Immediate._onImmediate (/Users/zgl/Documents/nodejsWork/Code/node_modules/express/lib/router/index.js:618:15)
+    at runCallback (timers.js:802:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5)

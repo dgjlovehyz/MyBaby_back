@@ -1,0 +1,16 @@
+{
+    "name": "kem_node_services_docs",
+    "script": "/home/kem_node_services/doc/app.js",
+    "instances": 1,
+    "exec_mode": "cluster",
+    "watch": false,
+    "ignore_watch": [
+        ".vscode",
+        "node_modules",
+        "logs"
+    ],
+    "max_memory_restart": "256M",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "error_file": "./logs/pm2err.log",
+    "out_file": "./logs/logout.log"
+}

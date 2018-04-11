@@ -1,0 +1,102 @@
+[2018-04-05 09:21:49.140] [ERROR] Error - TypeError: Cannot read property 'order_id' of undefined
+    at b2tGoodsDao.addB2tGroup.then.then.orderInfo (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/b2t/b2t-goods-biz.js:866:53)
+    at tryCatcher (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:512:31)
+    at Promise._settlePromise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:569:18)
+    at Promise._settlePromise0 (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:614:10)
+    at Promise._settlePromises (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:693:18)
+    at Async._drainQueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:133:16)
+    at Async._drainQueues (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:143:10)
+    at Immediate.Async.drainQueues [as _onImmediate] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:800:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5)
+[2018-04-05 09:35:45.108] [ERROR] Error - TypeError: Cannot read property 'order_id' of undefined
+    at b2tGoodsDao.addB2tGroup.then.then.orderInfo (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/b2t/b2t-goods-biz.js:866:53)
+    at tryCatcher (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:512:31)
+    at Promise._settlePromise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:569:18)
+    at Promise._settlePromise0 (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:614:10)
+    at Promise._settlePromises (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:693:18)
+    at Async._drainQueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:133:16)
+    at Async._drainQueues (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:143:10)
+    at Immediate.Async.drainQueues [as _onImmediate] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:800:20)
+    at tryOnImmediate (timers.js:762:5)
+    at processImmediate [as _immediateCallback] (timers.js:733:5)
+[2018-04-05 09:37:12.148] [ERROR] Error - [Function]
+[2018-04-05 09:40:23.793] [ERROR] Error - [Function]
+[2018-04-05 09:45:03.561] [ERROR] Error - [Function]
+[2018-04-05 09:45:47.275] [ERROR] Error - { Error: Unexpected token b in JSON at position 0
+    at Request.request [as _callback] (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/b2t/b2t-goods-biz.js:1244:40)
+    at Request.self.callback (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:186:22)
+    at Request.emit (events.js:159:13)
+    at Request.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1163:10)
+    at Request.emit (events.js:159:13)
+    at IncomingMessage.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/request/request.js:1085:12)
+    at Object.onceWrapper (events.js:254:19)
+    at IncomingMessage.emit (events.js:164:20)
+    at endReadableNT (_stream_readable.js:1054:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9) statusCode: 400, code: 30016 }
+[2018-04-05 15:43:54.564] [ERROR] Error - { Error: connect ECONNREFUSED 127.0.0.1:3306
+    at Object._errnoException (util.js:1031:13)
+    at _exceptionWithHostPort (util.js:1052:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1195:14)
+    --------------------
+    at Protocol._enqueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Protocol.handshake (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:52:23)
+    at PoolConnection.connect (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:130:18)
+    at Pool.getConnection (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:118:12)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:117:12)
+    at Function.manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:199:16)
+    at /Users/zgl/Documents/kmsp/Branch/Code/services/biz/small-order-biz.js:243:25
+    at nextTask (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5310:14)
+    at Object.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5320:5)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/small-order-biz.js:211:19)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 3306,
+  fatal: true }
+[2018-04-05 15:57:18.391] [ERROR] Error - { Error: ER_DBACCESS_DENIED_ERROR: Access denied for user 'kmsp'@'%' to database 'kmsp'
+    at Handshake.Sequence._packetToError (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/sequences/Sequence.js:52:14)
+    at Handshake.ErrorPacket (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/sequences/Handshake.js:130:18)
+    at Protocol._parsePacket (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:279:23)
+    at Parser.write (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+    at Socket.<anonymous> (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:103:28)
+    at Socket.emit (events.js:159:13)
+    at addChunk (_stream_readable.js:265:12)
+    at readableAddChunk (_stream_readable.js:252:11)
+    at Socket.Readable.push (_stream_readable.js:209:10)
+    at TCP.onread (net.js:598:20)
+    --------------------
+    at Protocol._enqueue (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Protocol.handshake (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/protocol/Protocol.js:52:23)
+    at PoolConnection.connect (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Connection.js:130:18)
+    at Pool.getConnection (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/mysql/lib/Pool.js:48:16)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:118:12)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+    at new Promise (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:79:10)
+    at manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:117:12)
+    at Function.manageConnection (/Users/zgl/Documents/kmsp/Branch/Code/framework/utils/dao.js:199:16)
+    at /Users/zgl/Documents/kmsp/Branch/Code/services/biz/small-order-biz.js:243:25
+    at nextTask (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5310:14)
+    at Object.waterfall (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/async/dist/async.js:5320:5)
+    at Promise (/Users/zgl/Documents/kmsp/Branch/Code/services/biz/small-order-biz.js:211:19)
+    at Promise._execute (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/debuggability.js:303:9)
+    at Promise._resolveFromExecutor (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/bluebird/js/release/promise.js:483:18)
+  code: 'ER_DBACCESS_DENIED_ERROR',
+  errno: 1044,
+  sqlMessage: 'Access denied for user \'kmsp\'@\'%\' to database \'kmsp\'',
+  sqlState: '42000',
+  fatal: true }

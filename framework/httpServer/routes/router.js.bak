@@ -1,0 +1,239 @@
+'use strict'
+
+const
+    express = require('express'),
+    onHeaders = require('on-headers'),
+    onFinished = require('on-finished'),
+    async = require('async'),
+
+    conf_sys = global.require('./config/system-config'),
+
+    signature = global.require('./framework/utils/signature'),
+    redisDB = global.require('./framework/utils/redis-client'),
+    authException = global.require('./framework/exception/authException'),
+    BusinessException = require('../../../framework/exception/businessException'),
+
+    authorizationBiz = global.require('./services/biz/authorization-biz'),
+    frontUserBiz = global.require('./services/biz/user/front-user-biz'),
+    AUTH_ROLE = global.require('./services/constant/auth-role'),
+    USER_TYPE = global.require('./services/constant/userType'),
+
+    ERROR_CODE = global.require('./services/constant/error-code');
+
+/**
+ *
+ *
+ * @module API路由
+ *
+ */
+module.exports = class {
+
+    constructor() {
+        this.router = express.Router();
+    }
+
+    get(path, option) {
+        this.pipe('get', path, option);
+    }
+
+    post(path, option) {
+        this.pipe('post', path, option);
+    }
+
+    put(path, option) {
+        this.pipe('put', path, option);
+    }
+
+    delete(path, option) {
+        this.pipe('delete', path, option);
+    }
+
+    /**
+     *
+     *
+     * @param {any} httpMethod
+     * @param {any} path 资源路径
+     * @param {any} option 路由选项
+     * option.name 控制器名称
+     * option.auth 是否验证登陆，实参不传默认为验证
+     *
+     */
+    pipe(httpMethod, path, option) {
+
+        let funs = [this.listener, (req, res, next) => {
+
+            option.path = path;
+            (option.auth === void 0 || option.auth === null) && (option.auth = true);
+            // request附加option
+            req.routerInfo = option;
+
+            // 权限验证 暂时不需要
+            //authCtrl.auth(req, res, next);
+            next()
+
+        },
+            (req, res, next) => {
+
+            let sessionId = req.headers['sessionid'];
+            async.waterfall([
+                (cb) => {
+                    //开放平台 - 签名验证
+                    let params = {
+                        "partner_id": req.query['partner_id'],
+                        "sign": req.query['sign'],
+                        "timestamp": req.query['timestamp']
+                    }
+                    if (params.partner_id && params.sign && params.timestamp) {
+                        signature.auth_partner(params, (err, result) => {
+                            cb(err, result);
+                        })
+                    } else {
+                        cb(null, null);
+                    }
+                },
+                (result, cb) => {
+                    //识别当前请求身份
+                    //---------- Partner Role ----------
+                    if (result) {
+                        result._authRole = AUTH_ROLE.get('PARTNER');
+                        return cb(null, result);
+                    }
+
+                    //根据session id获取用户信息
+                    if (sessionId) {
+                        redisDB.getStringCache(redisDB.getClient(), '', sessionId, (err, result) => {
+                            if (err) return cb(err);
+                            if (result) {
+                                //将User放到req中便于后续流程使用
+                                try {
+                                    req.user = JSON.parse(result);
+                                } catch (err) {
+
+
+                                    //------临时这样兼容旧版Java登录数据存储格式 START------
+                                    async.parallel([
+                                        (b) => { redisDB.getStringCache(redisDB.getClient(), sessionId, 'userid', b) },
+                                        (b) => { redisDB.getStringCache(redisDB.getClient(), sessionId, 'usertype', b) }
+                                    ], (err, results) => {
+                                        if (err) return cb(err);
+
+                                        if (results.filter((item) => { return item }).length != 0) {
+                                            //将User放到req中便于后续流程使用
+                                            req.user = {
+                                                userId: results[0],
+                                                userType: eval(results[1])  //由于取出来的数据格式多了一对引号，暂时用该方法转换成字符串。 Added by Dyllon
+                                            }
+                                            //---------- User Role ----------
+                                            cb(null, { userId: req.user.userId, _authRole: AUTH_ROLE.get('USER') });
+                                        } else {
+                                            //---------- Free Role ----------
+                                            cb(null, { _authRole: AUTH_ROLE.get('FREE') });
+                                        }
+                                    }); return;
+                                    //------临时这样兼容旧版Java登录数据存储格式 END------
+
+
+                                    return cb(err);
+                                }
+                                //---------- User Role ----------
+                                cb(null, { userId: req.user.user_id, _authRole: AUTH_ROLE.get('USER') });
+                            } else {
+                                //---------- Free Role ----------
+                                cb(null, { _authRole: AUTH_ROLE.get('FREE') });
+                            }
+                        });
+                    } else {
+                        //---------- Free Role ----------
+                        cb(null, { _authRole: AUTH_ROLE.get('FREE') });
+                    }
+                }
+
+            ], (err, result) => {
+                if (err) return next(new authException(err, 401));
+
+                //根据不同请求身份验证接口权限
+                switch (result._authRole) {
+                    case AUTH_ROLE.get('PARTNER'):
+                        next();
+                        break;
+
+                    case AUTH_ROLE.get('FREE'):
+                        next(req.routerInfo.authLogin ? new authException('验证失败，请重新登录。', ERROR_CODE.get('NOT_LOGIN')) : null);
+                        break;
+
+                    case AUTH_ROLE.get('USER'):
+                        //附加：[登录用户]是后台管理员权限，则通过验证。
+                        if (req.user.user_type == USER_TYPE.get('BACK_USER')) return next();
+
+                        async.series([
+                            cb => {
+                                // [登录用户]判断用户当前状态是否正常(ENABLE)
+                                frontUserBiz.checkLoginUserStatus({ sessionId: sessionId }, (err, result) => {
+                                    if (err) return cb(err);
+                                    let msg;
+                                    switch (result.data) {
+                                        case "ENABLE":
+                                        case "TRIAL":
+                                            break;
+                                        case "DELETE": msg = "账号已被删除"; break;
+                                        case "DISABLE": msg = "账号已被禁用"; break;
+                                        // 首次登陆时，这里会被限制，暂时屏蔽（大龙）
+                                        //case "UNDEFINED": msg = "未知账号状态"; break;
+                                    }
+                                    cb(msg ? new BusinessException(msg, ERROR_CODE.get('USER_DISABLE')) : null);
+                                });
+                            },
+                            cb => {
+                                // [登录用户]权限是否满足接口访问权限
+                                if (!req.routerInfo.authFunctionKeys) return cb(null);
+
+                                authorizationBiz.authorized({ userId: result.userId, functionKeys: req.routerInfo.authFunctionKeys }, (err, result) => {
+                                    cb(err || result.message == 'fail' ? new authException('没有权限，拒绝访问。', ERROR_CODE.get('NOT_AUTHORIZATION')) : null);
+                                });
+                            }
+                        ], (err) => {
+                            next(err);
+                        });
+                        break;
+
+                    default:
+                        next(new authException('验证失败，未知错误请求。', 401));
+                        break;
+                }
+            })
+
+            }
+            , (req, res, next) => {
+            // 格式验证
+            if (!!option.validater) {
+                next(option.validater(req))
+            } else {
+                next();
+            }
+        }];
+        let procs = Array.isArray(option.processor) ? option.processor : [option.processor];
+
+        funs = funs.concat(procs);
+        this.router[httpMethod](path, funs);
+    }
+
+    listener(req, res, next) {
+
+        // Execute a listener when a response is about to write headers.
+        onHeaders(res, () => {
+            //authCtrl.tokenGenerator(req, res);
+
+            //update session expire time
+            redisDB.updateExpire(redisDB.getClient(), '', req.headers["sessionid"], conf_sys.system.sessionExpire, (err, result) => {
+                //err && console.log(err);
+            });
+        })
+
+        // Execute a callback when a HTTP request closes, finishes, or errors.
+        onFinished(res, () => {
+            //console.log('onFinished');
+        })
+
+        next();
+    }
+}

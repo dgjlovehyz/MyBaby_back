@@ -1,0 +1,11 @@
+[2017-12-13 15:03:54.286] [ERROR] Error - { Error: Not Found
+    at module.exports (/Users/zgl/Documents/kmsp/Branch/Code/framework/httpServer/routes/router-not-found.js:12:10)
+    at Layer.handle [as handle_request] (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:312:13)
+    at /Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:280:7
+    at Function.process_params (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:330:12)
+    at next (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/express/lib/router/index.js:271:10)
+    at SendStream.error (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/serve-static/index.js:121:7)
+    at SendStream.emit (events.js:159:13)
+    at SendStream.error (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/send/index.js:275:17)
+    at SendStream.onStatError (/Users/zgl/Documents/kmsp/Branch/Code/node_modules/send/index.js:392:12) statusCode: 404, code: 404 }
