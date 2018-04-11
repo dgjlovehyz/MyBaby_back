@@ -101,9 +101,8 @@ module.exports = class {
                     }
                     if (val.echostr) {
                         //微信公众号验证单独处理
-                        val = {
-                            echostr: val.echostr
-                        }
+                        val = val.echostr
+                        
                     }
                     else if (
                         typeof val.status !== "number" &&
@@ -131,8 +130,6 @@ module.exports = class {
                     }
 
                     _json(val);
-
-
                 };
 
                 console.log("api:" + httpMethod + " " + path)
