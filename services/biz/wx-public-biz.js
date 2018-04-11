@@ -41,7 +41,7 @@ class demoBiz {
         for (let key of Object.keys(dict).sort()) {
             console.log('key：' + key)
             console.log('value：' + dict[key])
-            sha1Str = sha1 + dict[key]
+            sha1Str = sha1Str + dict[key]
         }
         var sha1 = crypto.createHash("sha1");
         sha1.update(sha1Str)
