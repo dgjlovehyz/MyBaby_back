@@ -43,6 +43,7 @@ class demoBiz {
         }
         var sha1 = crypto.createHash("sha1");
         sha1.update(sha1Str)
+        console.log("sha1Str:" + sha1Str)
         console.log("timestamp:" + params.timestamp)
         console.log("nonce" + params.nonce)
         var _signature = sha1.digest('hex')
