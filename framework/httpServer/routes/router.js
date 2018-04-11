@@ -99,7 +99,11 @@ module.exports = class {
                             val = arguments[1];
                         }
                     }
-                    if (
+                    if (val.echostr) {
+                        //微信公众号验证单独处理
+                        val = val.echostr
+                    }
+                    else if (
                         typeof val.status !== "number" &&
                         typeof val.code !== "number"
                     ) {
@@ -107,10 +111,7 @@ module.exports = class {
                             status: 0,
                             data: val.data || ""
                         };
-                        if (val.echostr) {
-                            //微信公众号验证单独处理
-                            ret.echostr = val.echostr
-                        }
+
                         if (!!val.hasOwnProperty("total")) {
                             var total = parseInt(val.total) || 0,
                                 count = 0,
@@ -126,7 +127,10 @@ module.exports = class {
                     if (!!status) {
                         return _json(val, status);
                     }
+
                     _json(val);
+
+
                 };
 
                 console.log("api:" + httpMethod + " " + path)
