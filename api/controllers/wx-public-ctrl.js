@@ -21,7 +21,7 @@ class WXPublicCtrl {
             if (err) {
                 return next(err);
             }
-            res.json({ echostr: result });
+            res.json(result);
         });
     }
 }

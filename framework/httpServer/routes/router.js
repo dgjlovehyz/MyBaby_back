@@ -87,6 +87,9 @@ module.exports = class {
 
                 var _json = res.json.bind(res);
                 res.json = function json(obj) {
+                    if (httpMethod == "get" && path == "/wx/msg") {
+                        return res.send(obj)
+                    }
                     var val = obj,
                         status;
                     // allow status / body
@@ -99,12 +102,8 @@ module.exports = class {
                             val = arguments[1];
                         }
                     }
-                    if (val.echostr) {
-                        //微信公众号验证单独处理
-                        val = val.echostr
-                        
-                    }
-                    else if (
+                    
+                    if (
                         typeof val.status !== "number" &&
                         typeof val.code !== "number"
                     ) {
