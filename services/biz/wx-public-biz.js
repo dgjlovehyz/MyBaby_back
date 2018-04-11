@@ -38,10 +38,9 @@ class demoBiz {
 
         let dict = { token: sysconf.wxToken, timestamp: params.timestamp, nonce: params.nonce };
         var sha1Str = '';
-        for (let key of Object.keys(dict).sort()) {
+        for (let key of Object.values(dict).sort()) {
             console.log('key：' + key)
-            console.log('value：' + dict[key])
-            sha1Str = sha1Str + dict[key]
+            sha1Str = sha1Str + key
         }
         var sha1 = crypto.createHash("sha1");
         sha1.update(sha1Str)
