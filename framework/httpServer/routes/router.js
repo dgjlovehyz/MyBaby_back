@@ -62,10 +62,7 @@ module.exports = class {
                         xml += chunk;
                     });
                     req.on('end', function () {
-                        // var json=xml2json.toJson(xml);
-                        // req.body = json
-                        // next()
-                        xml2js.parseString(xml, function (err, result) {
+                        xml2js.parseString(xml, {explicitArray : false}, function (err, result) {
                             var data = result.xml;
                             req.body = data
                             next()
