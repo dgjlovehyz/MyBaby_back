@@ -3,11 +3,9 @@ let wxPublicBiz = global.require("./services/biz/wx-public-biz");
 
 class WXPublicCtrl {
     static getWxMsg(req, res, next) {
-        let query = req.query;
+        let body = req.body;
 
-        query.pagination = req.pagination;
-
-        wxPublicBiz.getWxMsg(query, (err, result) => {
+        wxPublicBiz.getWxMsg(body, (err, result) => {
             if (err) {
                 return next(err);
             }

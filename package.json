@@ -19,6 +19,7 @@
         "decimal.js": "^7.2.0",
         "elasticsearch": "^13.0.0",
         "express": "~4.14.0",
+        "express-middlewares-js": "^1.0.3",
         "fs-extra": "^3.0.1",
         "immutable": "^3.8.1",
         "jade": "~1.11.0",
@@ -42,6 +43,8 @@
         "split": "^1.0.0",
         "underscore": "^1.8.3",
         "uuid": "^3.0.1",
-        "validator": "^7.0.0"
+        "validator": "^7.0.0",
+        "xml2js": "^0.4.19",
+        "xml2json": "^0.11.2"
     }
 }

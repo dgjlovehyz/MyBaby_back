@@ -9,8 +9,9 @@ const
     express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser')
-
+    bodyParser = require('body-parser'),
+    middlewares = require('express-middlewares-js');
+    
 const
     normalizePort = val => {
         var port = parseInt(val, 10);
@@ -44,7 +45,9 @@ const
         app.use(bodyParser.json())
         app.use(bodyParser.urlencoded({ extended: false }))
         app.use(cookieParser())
-
+        app.use('/weixin', middlewares.xmlBodyParser({
+            type: 'text/xml'
+          }));
         // 跨域
         app.all('*', require('./routes/router-cross-domain'));
 

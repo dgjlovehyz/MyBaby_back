@@ -25,7 +25,7 @@ const router = global.require("./framework/httpServer").router(),
 * @apiVersion 1.0.0
 */
 router.post("/wx/msg", {
-    auth: "wx",
+    // auth: "wx",
     processor: wxPublicCtrl.getWxMsg
 });
 

@@ -10,6 +10,8 @@ const express = require("express"),
     BusinessException = require("../../../framework/exception/businessException"),
     ERROR_CODE = global.require("./services/constant/error-code"),
     authCtrl = global.require("./api/controllers/auth-ctrl"),
+    xml2json = require('xml2json'),
+    xml2js = require('xml2js'),
     authBackCtrl = global.require("./api/controllers/auth-back-ctrl");
 
 /**
@@ -51,7 +53,29 @@ module.exports = class {
      */
     pipe(httpMethod, path, option) {
         let funs = [
-            this.listener,
+            this.listener, 
+            (req, res, next) => {
+                var xml = '';
+                if (httpMethod == 'post' && path == '/wx/msg') {
+                    req.setEncoding('utf8');
+                    req.on('data', function (chunk) {
+                        xml += chunk;
+                    });
+                    req.on('end', function () {
+                        // var json=xml2json.toJson(xml);
+                        // req.body = json
+                        // next()
+                        xml2js.parseString(xml, function (err, result) {
+                            var data = result.xml;
+                            req.body = data
+                            next()
+                        })
+                    });
+                } else {
+                    next()
+                }
+            }
+            ,
             (req, res, next) => {
                 option.path = path;
                 // (option.auth === void 0 || option.auth === null) &&
@@ -102,7 +126,7 @@ module.exports = class {
                             val = arguments[1];
                         }
                     }
-                    
+
                     if (
                         typeof val.status !== "number" &&
                         typeof val.code !== "number"
