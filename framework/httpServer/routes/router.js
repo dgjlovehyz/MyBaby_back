@@ -108,7 +108,7 @@ module.exports = class {
 
                 var _json = res.json.bind(res);
                 res.json = function json(obj) {
-                    if (httpMethod == "get" && path == "/wx/msg") {
+                    if (path == "/wx/msg") {
                         return res.send(obj)
                     }
                     var val = obj,

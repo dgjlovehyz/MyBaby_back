@@ -11,71 +11,50 @@ const _ = require("underscore"),
 
 class UserBiz {
 
+    static addNewUser(params, callback) {
+        if (!params.FromUserName)
+            callback("用户openId为空")
+
+        return dao.manageTransactionConnection(params, (connection, params, next) => {
+            userDao.getUser(connection, params)
+                .then(userMain => {
+                    if (userMain) {
+                        //用户已存在
+                        //更新用户的状态
+                        return userDao.updateUser(connection, { FromUserName: params.FromUserName, isDelete: 0 })
+                    } else {
+                        //用户不存在，新增用户
+                        return userDao.insertUser(connection, params)
+                    }
+                })
+                .then(data => {
+                    if (!data)
+                        return Promise.reject("用户信息更新失败")
+                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入一下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
+                })
+                .then(result => { next(null, result) })
+                .catch(next)
+        }).asCallback(callback)
+    }
+
     /**
-     * 添加用户
+     * 取消关注后更新用户信息
      * @param {*} params 
      * @param {*} callback 
      */
-    static save(params, callback) {
-
-        // 用户信息
-        var info = {};
-        if (params.vip_nickname) info.vip_nickname = params.vip_nickname;
-        if (params.vip_name) info.vip_name = params.vip_name;
-        if (params.vip_face) info.vip_face = params.vip_face;
-        if (params.vip_account) info.vip_account = params.vip_account;
-        if (params.vip_mail) info.vip_mail = params.vip_mail;
-        if (params.vip_mobile) info.vip_mobile = params.vip_mobile;
-        if (params.vip_openid) info.vip_openid = params.vip_openid;
-        if (params.vip_bind_type) info.vip_bind_type = params.vip_bind_type;
-
-        return dao.manageConnection(null, (connection, __, next) => {
-            async.waterfall([
-                // 查询用户信息是否存在
-                (cb) => {
-                    var query = {
-                        baseId: params.userId,
-                        shopId: params.shopId
-                    }
-                    userDao.getById(connection, query, cb);
-                },
-                // 根据查询结果判断新增 or 修改
-                (result, cb) => {
-                    if (result.length > 0) {
-                        var data = {
-                            info: info,
-                            baseId: params.userId,
-                            shopId: params.shopId
-                        }
-                        userDao.update(connection, data, cb);
-                    } else {
-                        info.vip_base_id = params.userId;
-                        info.vip_shop_id = params.shopId;
-                        userDao.insert(connection, info, cb);
-                    }
-                }
-            ], next);
-        }).asCallback(callback);
-    }
-
-    static gethost(params, callback) {
-        if (!params.shopId)
-            return callback(new businessException("店铺id为空", -1))
-        return dao.manageConnection(null, (connection, __, next) => {
-            userDao.gethost(connection, params, (err, result) => {
-                next(err, result);
-            });
-        }).asCallback(callback);
-    }
-
-    static updateAfterBindUserInfo(params, callback) {
-        if (!params.oldId || !params.newId)
-            return callback(new businessException("请求参数错误", -1))
-        return dao.manageConnection(null, (connection, __, next) => {
-            userDao.updateAfterBindUserInfo(connection, params, (err, result) => {
-                next(err, result);
-            });
-        }).asCallback(callback);
+    static updateUser(params, callback) {
+        if (!params.FromUserName)
+            callback("用户openId为空")
+        return dao.manageTransactionConnection(params, (connection, params, next) => {
+            userDao.updateUser(connection, { FromUserName: params.FromUserName, isDelete: 1 })
+                .then(data => {
+                    if (!data)
+                        return Promise.reject("用户信息更新失败")
+                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入一下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
+                })
+                .then(result => { next(null, result) })
+                .catch(next)
+        }).asCallback(callback)
     }
 }
 
