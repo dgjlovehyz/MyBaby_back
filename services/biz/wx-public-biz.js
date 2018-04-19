@@ -77,13 +77,16 @@ class wxPublicBiz {
                 let returnEntity = {}
                 if (err instanceof Error)
                     Content = '操作异常，请重新输入或输入103清空操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝'
-                if (err)
+                if (err) {
                     Content = err
-                if (typeof result == 'string') {
-                    Content = result
+
                 } else {
-                    returnEntity.MsgType = params.MsgType
-                    Content = params.Content
+                    if (typeof result == 'string') {
+                        Content = result
+                    } else {
+                        returnEntity.MsgType = result.MsgType
+                        Content = result.Content
+                    }
                 }
                 returnEntity.Content = Content
                 returnEntity.ToUserName = params.ToUserName
@@ -200,7 +203,7 @@ class wxPublicBiz {
             MsgType = params.MsgType;
         }
 
-        var msg = "<?xml version=\"1.0\"?>" +
+        var msg = "" +
             "<xml>" +
             "<ToUserName><![CDATA[" + params.ToUserName + "]]></ToUserName>" +
             "<FromUserName><![CDATA[" + params.FromUserName + "]]></FromUserName>" +
