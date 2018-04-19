@@ -153,6 +153,7 @@ class wxPublicBiz {
                     cb(null, result)
                 }
             }, (result, cb) => {
+                console.log('获取请求，并且分路')
                 params.redisData = result
                 if (result) {
                     switch (+result.frist) {
@@ -193,6 +194,7 @@ class wxPublicBiz {
      * @param {*} callback 
      */
     static wxReturnXml(params) {
+        console.log('组装返回数据')
         //自动检测 MsgType
         var MsgType = "";
         if (!params.MsgType) {

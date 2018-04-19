@@ -110,7 +110,9 @@ module.exports = class {
                 res.json = function json(obj) {
                     if (path == "/wx/msg") {
                         console.log("json:" + httpMethod + " " + path + JSON.stringify(obj))
-                        return res.send(obj)
+                        res.writeHead(200, {'Content-Type': 'text/plain'})
+                        
+                        return res.end(obj)
                     }
                     var val = obj,
                         status;
