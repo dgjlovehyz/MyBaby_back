@@ -78,13 +78,14 @@ class wxPublicBiz {
                 if (err instanceof Error)
                     Content = '操作异常，请重新输入或输入103清空操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝'
                 if (err)
-                    returnEntity.Content = err
+                    Content = err
                 if (typeof result == 'string') {
-                    returnEntity.Content = result
+                    Content = result
                 } else {
                     returnEntity.MsgType = params.MsgType
-                    returnEntity.Content = result.Content
+                    Content = params.Content
                 }
+                returnEntity.Content = Content
                 returnEntity.ToUserName = params.ToUserName
                 returnEntity.FromUserName = params.FromUserName
                 
