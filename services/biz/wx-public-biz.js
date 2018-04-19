@@ -97,14 +97,20 @@ class wxPublicBiz {
                         user_id: ""
                     }
                     dao.manageConnection(params, (connection, params, next) => {
-                        userDao.getUser(connection, params, (err, result) => {
-                            result.user_id = result[0].user_id
+                        userDao.getUser(connection, params, (err, userInfo) => {
+                            result.user_id = userInfo.user_id
                             next()
-                        })   
+                            cb(null, result)
+                        })
                     })
-                    
+
                 } else {
-                    if (!result.second) {
+                    if (+params.Content == 103) {
+                        //清除操作
+                        result.frist = params.Content
+                    } else if (!result.frist) {
+                        result.frist = params.Content
+                    } else if (!result.second) {
                         result.second = params.Content
                     } else if (!result.three) {
                         result.three = params.Content
@@ -112,10 +118,13 @@ class wxPublicBiz {
                         result.four = params.Content
                     } else if (!result.five) {
                         result.five = params.Content
+                    } else if (!result.six) {
+                        result.six = params.Content
                     }
+                    cb(null, result)
                 }
+            }, (result, cb) => {
                 params.redisData = result
-
                 if (result) {
                     switch (+result.frist) {
                         case 100:
@@ -130,7 +139,8 @@ class wxPublicBiz {
                             //绑定新的宝贝
                             break;
                         case 103:
-                            //
+                            //清除操作
+                            return wxPublicBiz.clearRedis(params, cb)
                             break;
                         default:
                             cb(null, "请输入正确操作")
@@ -138,8 +148,6 @@ class wxPublicBiz {
 
                     }
                 }
-
-
             }], (err, result) => {
                 //处理微信公众号返回消息
                 redis.setStringCache(redis.getClient(), "user", params.FromUserName, JSON.stringify(params.redisData), 10000, (err, result) => { console.log(err, result) })
@@ -153,9 +161,37 @@ class wxPublicBiz {
         } else if (params.redisData.four) {
 
         } else if (params.redisData.three) {
+            switch (+params.redisData.three) {
+                case 110:
+                    var child = params.redisData.children[params.redisData.index]
+                    var returnText = '宝贝-' + child.name + ' 的编号：' + child.uuid + '\n（请保存好宝贝编号，勿泄露给不认识的人）\n查询功能：\n110：查询宝贝编号（绑定宝贝用，请勿泄露）\n111：查询宝贝最近7张照片'
+                    params.redisData.three = ''
+                    return callback(null, { MsgType: 'text', Content: returnText })
+                    break;
+                case 111:
+                    break;
+                default:
+                    callback(null, "操作错误，请重新输入！")
+                    break;
+            }
 
         } else if (params.redisData.second) {
-
+            var returnText
+            for (var i = 0; i < params.redisData.children.length; i++) {
+                if (params.redisData.children[i].id == params.redisData.second) {
+                    let child = params.redisData.children[i]
+                    returnText = child.child_relation + "：" + child.name + "\n"
+                    returnText += "性别：" + (child.sex == 1 ? "女" : "男") + "\n"
+                    var time = moment(child.birth_time).format('YYYY-MM-DD HH:mm:ss');
+                    returnText += "出生日期：" + time + '\n'
+                    returnText += '查询功能：\n110：查询宝贝编号（绑定宝贝用，请勿泄露）\n111：查询宝贝最近7张照片\n112：添加照片'
+                    params.redisData.index = i
+                    return callback(null, { MsgType: 'text', Content: returnText })
+                }
+            }
+            returnText = "输入错误，请重新输入！"
+            params.redisData.second = ''
+            return callback(null, { MsgType: 'text', Content: returnText })
         } else if (params.redisData.frist) {
             //查询绑定的宝贝
             childrenBiz.queryBindChild(params, (err, result) => {
@@ -165,34 +201,60 @@ class wxPublicBiz {
                 if (result.length <= 0)
                     return callback("没有绑定宝贝\n输入：101 新建您的宝贝、\n或者输入：102 绑定您的宝贝")
                 var returnText = '您绑定的宝贝有：\n';
+                params.redisData.children = []
+                var childInfo
                 for (var i = 0; i < result.length; i++) {
+                    returnText += (i + 1) + ":"
                     returnText += result[i].child_relation
                     returnText += "：" + result[i].name
                     returnText += "\n"
+                    childInfo = result[i]
+                    childInfo.id = i + 1
+                    params.redisData.children.push(childInfo)
                 }
-                callback(null, returnText)
+                returnText += "输入编号：1或2..查询对应宝贝的信息"
+
+                return callback(null, { MsgType: 'text', Content: returnText })
             })
         }
     }
 
+    /**
+     * 清除操作
+     * @param {*} params 
+     * @param {*} callback 
+     */
+    static clearRedis(params, callback) {
+        params.redisData = { user_id: params.redisData.user_id }
+        var returnText = "输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝"
+        callback(null, { MsgType: 'text', Content: returnText })
+    }
 
+    /**
+     * 新建宝贝
+     * @param {*} params 
+     * @param {*} callback 
+     */
     static addNewBaby(params, callback) {
         if (params.redisData.six) {
             var uuid = UUID.v1()
-            childrenBiz.createBaby({uuid:uuid, 
-                name:params.redisData.second, 
-                sex:params.redisData.three,
+            childrenBiz.createBaby({
+                uuid: uuid,
+                name: params.redisData.second,
+                sex: params.redisData.three,
                 birth_time: params.redisData.four,
-                user_relation:params.redisData.five,
-                child_relation:params.redisData.six
+                user_relation: params.redisData.five,
+                child_relation: params.redisData.six,
+                user_id: params.redisData.user_id
             }, (err, result) => {
-
-                callback(null, "宝贝数据新建成功")
+                params.redisData = { user_id: params.redisData.user_id }
+                var returnText = "宝贝数据新建成功!\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝"
+                callback(null, { MsgType: 'text', Content: returnText })
             })
 
         } else if (params.redisData.five) {
-            var returnText = '新建宝贝档案：\n请输入你是宝贝的\n（举个栗子：微信公众号发送”爸爸（妈妈/爷爷/奶奶）“'
-            callback(null, "宝贝数据新建成功")
+            var returnText = '新建宝贝档案：\n请输入你是宝贝的\n（举个栗子：微信公众号发送”爸爸（妈妈/爷爷/奶奶）“\n输入103清空操作'
+            callback(null, { MsgType: 'text', Content: returnText })
         } else if (params.redisData.four) {
             //收到宝贝出生日期
 
@@ -201,28 +263,28 @@ class wxPublicBiz {
             if (!res) {
                 //清除本次操作
                 params.redisData.four = ''
-                return callback("日期格式错误，请重新输入\n请发送宝贝出生日期\n（日期格式：2019/01/01 14:20 举个栗子：微信公众号发送“2019/01/01 14:20”）\n")
+                return callback("日期格式错误，请重新输入\n请发送宝贝出生日期\n（日期格式：2019-01-01 14:20 举个栗子：微信公众号发送“2019/01/01 14:20”）\n输入103清空操作")
             }
-            var returnText = '新建宝贝档案：\n请输入宝贝和你的关系\n（举个栗子：微信公众号发送”女儿（儿子/侄儿）“'
-            callback(null, returnText)
+            var returnText = '新建宝贝档案：\n请输入宝贝和你的关系\n（举个栗子：微信公众号发送”女儿（儿子/侄儿）“\n输入103清空操作'
+            callback(null, { MsgType: 'text', Content: returnText })
             //宝贝档案收集齐全，开始新建宝贝档案，并且关联绑定
 
         } else if (params.redisData.three) {
             //收到宝贝性别
             if (params.Content > 2 || params.Content < 1) {
                 params.redisData.three = ''
-                return callback('输入错误，请重新输入\n请发送宝贝性别\n（1：女  2：男  举个栗子：微信公众号发送“1"\n')
+                return callback('输入错误，请重新输入\n请发送宝贝性别\n（1：女  2：男  举个栗子：微信公众号发送“1"\n输入103清空操作')
             }
-            var returnText = '新建宝贝档案：\n请输入宝贝出生日期\n（日期格式：2019/01/01 14:20 举个栗子：微信公众号发送“2019/01/01 14:20”）\n'
-            callback(null, returnText)
+            var returnText = '新建宝贝档案：\n请输入宝贝出生日期\n（日期格式：2019/01/01 14:20 举个栗子：微信公众号发送“2019/01/01 14:20”）\n输入103清空操作'
+            callback(null, { MsgType: 'text', Content: returnText })
         } else if (params.redisData.second) {
             //收到宝贝的名称
-            var returnText = '新建宝贝档案：\n请输入宝贝性别\n（1：女  2：男  举个栗子：微信公众号发送“1”）\n'
-            callback(null, returnText)
+            var returnText = '新建宝贝档案：\n请输入宝贝性别\n（1：女  2：男  举个栗子：微信公众号发送“1”）\n输入103清空操作'
+            callback(null, { MsgType: 'text', Content: returnText })
         } else if (params.redisData.frist) {
             //收到新建宝贝档案的请求
-            var returnText = '新建宝贝档案：\n请输入宝贝名称\n（举个栗子：微信公众号发送“二狗蛋”）\n'
-            callback(null, returnText)
+            var returnText = '新建宝贝档案：\n请输入宝贝名称\n（举个栗子：微信公众号发送“二狗蛋”）\n输入103清空操作'
+            callback(null, { MsgType: 'text', Content: returnText })
         }
     }
 

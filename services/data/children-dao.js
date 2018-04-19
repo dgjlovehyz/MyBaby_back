@@ -65,7 +65,7 @@ class childrenDao {
 
         return new Promise((resolve, reject) => {
             connection.query(sql, sqlParams, (err, result) => {
-                return err ? reject(err) : resolve(result.id)
+                return err ? reject(err) : resolve(result.insertId)
             })
         })
     }

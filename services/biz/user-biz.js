@@ -11,6 +11,11 @@ const _ = require("underscore"),
 
 class UserBiz {
 
+    /**
+     * 新用户关注
+     * @param {*} params 
+     * @param {*} callback 
+     */
     static addNewUser(params, callback) {
         if (!params.FromUserName)
             callback("用户openId为空")
@@ -30,7 +35,7 @@ class UserBiz {
                 .then(data => {
                     if (!data)
                         return Promise.reject("用户信息更新失败")
-                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入一下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
+                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
                 })
                 .then(result => { next(null, result) })
                 .catch(next)
@@ -50,7 +55,7 @@ class UserBiz {
                 .then(data => {
                     if (!data)
                         return Promise.reject("用户信息更新失败")
-                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入一下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
+                    return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
                 })
                 .then(result => { next(null, result) })
                 .catch(next)

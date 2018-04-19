@@ -38,7 +38,7 @@ class UserDao {
                 sql(),
                 sqlParams,
                 (err, result) => {
-                    return err ? reject(err) : resolve(result.length > 0 ? true : false);
+                    return err ? reject(err) : resolve(result[0]);
                 }
             );
         }).asCallback(callback);
@@ -59,7 +59,7 @@ class UserDao {
 
         return new Promise((resolve, reject) => {
             connection.query(sql, sqlParams, (err, result) => {
-                return err ? reject(err) : resolve(result.affectedRows > 0 ? true : false)
+                return err ? reject(err) : resolve(result.insertId)
             })
         }).asCallback(callback)
 
