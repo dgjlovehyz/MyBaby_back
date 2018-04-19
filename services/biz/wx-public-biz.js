@@ -143,16 +143,110 @@ class wxPublicBiz {
                             return wxPublicBiz.clearRedis(params, cb)
                             break;
                         default:
-                            cb(null, "请输入正确操作")
+                            let returnText = "请输入正确操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝"
+                            cb(null, { MsgType: 'text', Content: returnText })
                             break;
 
                     }
                 }
             }], (err, result) => {
                 //处理微信公众号返回消息
+                let Content = ''
+                if (err instanceof Error)
+                    Content = '操作异常，请重新输入或输入103清空操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝'
+                if (err)
+                    result.Content = err
+                result.ToUserName = params.ToUserName
+                result.FromUserName = params.FromUserName
+
+                //用户操作存入redis
                 redis.setStringCache(redis.getClient(), "user", params.FromUserName, JSON.stringify(params.redisData), 10000, (err, result) => { console.log(err, result) })
-                callback(err, result)
+
+                callback(err, wxPublicBiz.wxReturnXml(result))
             })
+    }
+
+    /**
+     * 组织返回值
+     * @param {*} params 
+     * @param {*} callback 
+     */
+    static wxReturnXml(params) {
+        //自动检测 MsgType
+        var MsgType = "";
+        if (!params.MsgType) {
+            if (params.hasOwnProperty("Content")) MsgType = "text";
+            if (params.hasOwnProperty("MusicUrl")) MsgType = "music";
+            if (params.hasOwnProperty("Articles")) MsgType = "news";
+        } else {
+            MsgType = params.MsgType;
+        }
+
+        var msg = "<?xml version=\"1.0\"?>" +
+            "<xml>" +
+            "<ToUserName><![CDATA[" + params.ToUserName + "]]></ToUserName>" +
+            "<FromUserName><![CDATA[" + params.FromUserName + "]]></FromUserName>" +
+            "<CreateTime>" + Date.now() / 1000 + "</CreateTime>" +
+            "<MsgType><![CDATA[" + MsgType + "]]></MsgType>";
+
+        switch (MsgType) {
+            case 'text':
+                msg += "" +
+                    "<Content><![CDATA[" + (params.Content || '') + "]]></Content>" +
+                    "</xml>";
+                return msg;
+
+            case 'image':
+                msg += "" +
+                    "<Image>" +
+                    "<MediaId><![CDATA[" + params.MediaId + "]]></MediaId>" +
+                    "</Image>" +
+                    "</xml>";
+
+            case 'voice':
+                msg += "" +
+                    "<Voice>" +
+                    "<MediaId><![CDATA[" + params.MediaId + "]]></MediaId>" +
+                    "<Title><![CDATA[" + params.Title + "]]></Title>" +
+                    "<Description><![CDATA[" + params.Description + "]]></Description>" +
+                    "</Voice>" +
+                    "</xml>";
+
+            case 'video':
+                msg += "" +
+                    "<Video>" +
+                    "<MediaId><![CDATA[" + params.MediaId + "]]></MediaId>" +
+                    "</Video>" +
+                    "</xml>";
+
+            case 'music':
+                msg += "" +
+                    "<Music>" +
+                    "<Title><![CDATA[" + (params.Title || '') + "]]></Title>" +
+                    "<Description><![CDATA[" + (params.Description || '') + "]]></Description>" +
+                    "<MusicUrl><![CDATA[" + (params.MusicUrl || '') + "]]></MusicUrl>" +
+                    "<HQMusicUrl><![CDATA[" + (params.HQMusicUrl || data.MusicUrl || '') + "]]></HQMusicUrl>" +
+                    "<ThumbMediaId><![CDATA[" + (params.ThumbMediaId || '') + "]]></ThumbMediaId>" +
+                    "</Music>" +
+                    "</xml>";
+                return msg;
+
+            case 'news':
+                var ArticlesStr = "";
+                var ArticleCount = params.Articles.length;
+                for (var i in params.Articles) {
+                    ArticlesStr += "" +
+                        "<item>" +
+                        "<Title><![CDATA[" + (params.Articles[i].Title || '') + "]]></Title>" +
+                        "<Description><![CDATA[" + (params.Articles[i].Description || '') + "]]></Description>" +
+                        "<PicUrl><![CDATA[" + (params.Articles[i].PicUrl || '') + "]]></PicUrl>" +
+                        "<Url><![CDATA[" + (params.Articles[i].Url || '') + "]]></Url>" +
+                        "</item>";
+                }
+
+                msg += "<ArticleCount>" + ArticleCount + "</ArticleCount><Articles>" + ArticlesStr + "</Articles></xml>";
+                return msg;
+        }
     }
 
     static searchBindBaby(params, callback) {
