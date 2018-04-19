@@ -73,6 +73,7 @@ class wxPublicBiz {
 
             }], (err, result) => {
                 //处理微信公众号返回消息
+                console.log('处理返回消息')
                 let Content = ''
                 let returnEntity = {}
                 if (err instanceof Error)
@@ -180,7 +181,7 @@ class wxPublicBiz {
                     }
                 }
             }], (err, result) => {
-
+                console.log('操作完成，添加缓存并且返回结果')
                 //用户操作存入redis
                 redis.setStringCache(redis.getClient(), "user", params.FromUserName, JSON.stringify(params.redisData), 10000, (err, result) => { console.log(err, result) })
 
@@ -273,6 +274,7 @@ class wxPublicBiz {
     }
 
     static searchBindBaby(params, callback) {
+        console.log('100操作')
         if (params.redisData.five) {
 
         } else if (params.redisData.four) {
@@ -311,6 +313,7 @@ class wxPublicBiz {
             return callback(null, { MsgType: 'text', Content: returnText })
         } else if (params.redisData.frist) {
             //查询绑定的宝贝
+            console.log('查询绑定的宝贝')
             childrenBiz.queryBindChild(params, (err, result) => {
                 if (err)
                     return callback(err)
@@ -330,7 +333,7 @@ class wxPublicBiz {
                     params.redisData.children.push(childInfo)
                 }
                 returnText += "输入编号：1或2..查询对应宝贝的信息"
-
+                console.log('查询绑定宝贝返回')
                 return callback(null, { MsgType: 'text', Content: returnText })
             })
         }
@@ -342,6 +345,7 @@ class wxPublicBiz {
      * @param {*} callback 
      */
     static clearRedis(params, callback) {
+        console.log('清楚操作')
         params.redisData = { user_id: params.redisData.user_id }
         var returnText = "输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝"
         callback(null, { MsgType: 'text', Content: returnText })
