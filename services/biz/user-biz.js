@@ -26,15 +26,18 @@ class UserBiz {
                     if (userMain) {
                         //用户已存在
                         //更新用户的状态
+                        console.log('老用户重新关注')
                         return userDao.updateUser(connection, { FromUserName: params.FromUserName, isDelete: 0 })
                     } else {
                         //用户不存在，新增用户
+                        console.log('新用户关注')
                         return userDao.insertUser(connection, params)
                     }
                 })
                 .then(data => {
                     if (!data)
                         return Promise.reject("用户信息更新失败")
+                    console.log('用户添加成功')
                     return Promise.resolve("欢迎关注MyBaby,我们是私人公众号，如果您关注错误，请退订谢谢！\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝")
                 })
                 .then(result => { next(null, result) })

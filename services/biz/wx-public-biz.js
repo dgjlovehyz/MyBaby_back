@@ -23,50 +23,75 @@ class wxPublicBiz {
      */
     static getWxMsg(params, callback) {
         console.log(params)
-        switch (params.MsgType) {
-            case 'text':
-                //收到普通消息
-                wxPublicBiz.normalMsg(params, (err, result) => {
-                    callback(err, result)
-                })
-                break;
+        async.waterfall([
+            (cb) => {
+                switch (params.MsgType) {
+                    case 'text':
+                        //收到普通消息
+                        wxPublicBiz.normalMsg(params, (err, result) => {
+                            cb(err, result)
+                        })
+                        break;
 
-            case 'image':
-                //图片消息
-                break;
+                    case 'image':
+                        //图片消息
+                        break;
 
-            case 'voice':
-                //暂时不处理
-                break;
+                    case 'voice':
+                        //暂时不处理
+                        break;
 
-            case 'video':
-                //暂时不处理
-                break;
+                    case 'video':
+                        //暂时不处理
+                        break;
 
-            case 'location':
-                //定位，暂时不处理
-                break;
+                    case 'location':
+                        //定位，暂时不处理
+                        break;
 
-            case 'link':
-                //暂时不处理
-                break;
+                    case 'link':
+                        //暂时不处理
+                        break;
 
-            case 'event':
-                if (params.Event == 'subscribe') {
-                    //新人关注
-                    userBiz.addNewUser(params, (err, result) => {
-                        callback(err, result)
-                    })
-                } else if (params.Event == 'unsubscribe') {
-                    //取消关注
-                    userBiz.updateUser(params, (err, result) => {
-                        callback(err, result)
-                    })
+                    case 'event':
+                        if (params.Event == 'subscribe') {
+                            //新人关注
+                            console.log('关注事件')
+                            userBiz.addNewUser(params, (err, result) => {
+                                cb(err, result)
+                            })
+                        } else if (params.Event == 'unsubscribe') {
+                            //取消关注
+                            userBiz.updateUser(params, (err, result) => {
+                                cb(err, result)
+                            })
+                        }
+                        break;
+                    default:
+                        cb("非法操作")
                 }
-                break;
-            default:
-                callback("非法操作")
-        }
+
+            }], (err, result) => {
+                //处理微信公众号返回消息
+                let Content = ''
+                let returnEntity = {}
+                if (err instanceof Error)
+                    Content = '操作异常，请重新输入或输入103清空操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝'
+                if (err)
+                    returnEntity.Content = err
+                if (typeof result == 'string') {
+                    returnEntity.Content = result
+                } else {
+                    returnEntity.MsgType = params.MsgType
+                    returnEntity.Content = result.Content
+                }
+                returnEntity.ToUserName = params.ToUserName
+                returnEntity.FromUserName = params.FromUserName
+                
+
+                callback(err, wxPublicBiz.wxReturnXml(returnEntity))
+            })
+
         // callback(null, true)
     }
 
@@ -150,19 +175,11 @@ class wxPublicBiz {
                     }
                 }
             }], (err, result) => {
-                //处理微信公众号返回消息
-                let Content = ''
-                if (err instanceof Error)
-                    Content = '操作异常，请重新输入或输入103清空操作\n输入以下数字查询对应功能：\n100：查询绑定的宝贝\n101：新建宝贝档案\n102：绑定新的宝贝'
-                if (err)
-                    result.Content = err
-                result.ToUserName = params.ToUserName
-                result.FromUserName = params.FromUserName
 
                 //用户操作存入redis
                 redis.setStringCache(redis.getClient(), "user", params.FromUserName, JSON.stringify(params.redisData), 10000, (err, result) => { console.log(err, result) })
 
-                callback(err, wxPublicBiz.wxReturnXml(result))
+                callback(err, result)
             })
     }
 
