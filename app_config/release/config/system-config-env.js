@@ -30,10 +30,10 @@ module.exports = {
 
     // 业务数据库
     db: mysql.createPool({
-        host: '182.61.45.171',
+        host: '172.16.127.187',
         user: 'root',
-        password: 'i4nbs6Zp',
-        database: 'myBaby',
+        password: 'My*sql123',
+        database: 'mybaby',
         multipleStatements: '',
         connectionLimit: 50,
         charset: 'utf8mb4'
@@ -41,7 +41,7 @@ module.exports = {
 
     // 业务缓存服务
     redis: {
-        host: '182.61.45.171',
+        host: '172.16.127.187',
         port: 6375,
         password: 'dgj123456',
         socket_keepalive: true,
