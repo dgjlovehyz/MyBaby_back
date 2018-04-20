@@ -212,15 +212,15 @@ class wxPublicBiz {
 
         var msg = "" +
             "<xml>" +
-            "<ToUserName><![CDATA[" + params.ToUserName + "]]></ToUserName>" +
-            "<FromUserName><![CDATA[" + params.FromUserName + "]]></FromUserName>" +
+            "<ToUserName>" + params.ToUserName + "</ToUserName>" +
+            "<FromUserName>" + params.FromUserName + "</FromUserName>" +
             "<CreateTime>" + Date.now() / 1000 + "</CreateTime>" +
-            "<MsgType><![CDATA[" + MsgType + "]]></MsgType>";
+            "<MsgType>" + MsgType + "</MsgType>";
 
         switch (MsgType) {
             case 'text':
                 msg += "" +
-                    "<Content><![CDATA[" + (params.Content || '') + "]]></Content>" +
+                    "<Content>" + (params.Content || '') + "</Content>" +
                     "</xml>";
                 return msg;
 
