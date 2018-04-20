@@ -25,6 +25,7 @@ class wxPublicBiz {
         console.log(params)
         async.waterfall([
             (cb) => {
+                console.log('消息类型分类')
                 switch (params.MsgType) {
                     case 'text':
                         //收到普通消息
@@ -107,6 +108,7 @@ class wxPublicBiz {
      * @param {*} callback 
      */
     static normalMsg(params, callback) {
+        console.log('得到普通消息')
         async.waterfall([
             (cb) => {
                 //获取redis中数据
@@ -155,6 +157,7 @@ class wxPublicBiz {
                 }
             }, (result, cb) => {
                 console.log('获取请求，并且分路')
+                console.log("redis data: " + result)
                 params.redisData = result
                 if (result) {
                     switch (+result.frist) {
@@ -278,7 +281,7 @@ class wxPublicBiz {
         if (params.redisData.five) {
 
         } else if (params.redisData.four) {
-
+            console.log('误操作')
         } else if (params.redisData.three) {
             switch (+params.redisData.three) {
                 case 110:
