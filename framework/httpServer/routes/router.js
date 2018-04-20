@@ -53,7 +53,7 @@ module.exports = class {
      */
     pipe(httpMethod, path, option) {
         let funs = [
-            this.listener, 
+            this.listener,
             (req, res, next) => {
                 var xml = '';
                 if (httpMethod == 'post' && path == '/wx/msg') {
@@ -62,7 +62,7 @@ module.exports = class {
                         xml += chunk;
                     });
                     req.on('end', function () {
-                        xml2js.parseString(xml, {explicitArray : false}, function (err, result) {
+                        xml2js.parseString(xml, { explicitArray: false }, function (err, result) {
                             var data = result.xml;
                             req.body = data
                             next()
@@ -110,9 +110,9 @@ module.exports = class {
                 res.json = function json(obj) {
                     if (path == "/wx/msg") {
                         console.log("json:" + httpMethod + " " + path + JSON.stringify(obj))
-                        res.writeHead(200, {'Content-Type': 'text/plain'})
-                        
-                        return res.end(obj)
+                        // res.writeHead(200, {'Content-Type': 'text/plain'})
+                        return res.send(obj)
+                        // return res.end(obj)
                     }
                     var val = obj,
                         status;
