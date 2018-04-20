@@ -42,7 +42,7 @@ module.exports = {
     // 业务缓存服务
     redis: {
         host: '172.16.127.187',
-        port: 6375,
+        port: 6379,
         password: 'dgj123456',
         socket_keepalive: true,
         db: 0

@@ -114,6 +114,7 @@ class wxPublicBiz {
                 //获取redis中数据
                 redis.getStringCache(redis.getClient(), "user", params.FromUserName, (err, result) => {
                     //获取到的数据返回
+                    console.log('获取redis数据为：' + result)
                     cb(err, JSON.parse(result))
                 })
             },
