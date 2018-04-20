@@ -109,6 +109,10 @@ module.exports = class {
                 var _json = res.json.bind(res);
                 res.json = function json(obj) {
                     if (path == "/wx/msg") {
+                        if ( httpMethod == 'post') {
+                            console.log("json:" + httpMethod + " " + path + JSON.stringify(obj))
+                            return  _json(obj)
+                        }
                         console.log("json:" + httpMethod + " " + path + JSON.stringify(obj))
                         res.writeHead(200, {'Content-Type': 'text/plain'})
                         return res.end(obj)
