@@ -210,7 +210,7 @@ class wxPublicBiz {
             MsgType = params.MsgType;
         }
 
-        var msg = "" +
+        var msg = "<?xml version=\"1.0\"?>" +
             "<xml>" +
             "<ToUserName>" + params.ToUserName + "</ToUserName>" +
             "<FromUserName>" + params.FromUserName + "</FromUserName>" +
